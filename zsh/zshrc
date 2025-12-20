@@ -1,0 +1,64 @@
+
+case "$(uname -s)" in
+  Darwin) source ".dotfiles/zsh/mac.zsh" ;;
+  Linux)  source ".dotfiles/zsh/linux.zsh" ;;
+esac
+
+# 初始化补全系统
+autoload -Uz compinit
+compinit
+
+# 加载历史前缀搜索 widget
+autoload -Uz up-line-or-beginning-search
+autoload -Uz down-line-or-beginning-search
+
+# 注册为 zle widget（关键）
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+
+# 绑定方向键
+bindkey '^[[A' up-line-or-beginning-search
+bindkey '^[[B' down-line-or-beginning-search
+
+
+# ===== Home / End 键支持 =====
+
+# Home
+bindkey '^[[H' beginning-of-line
+bindkey '^[[1~' beginning-of-line
+bindkey '^[[7~' beginning-of-line
+bindkey '^[[OH' beginning-of-line
+
+# End
+bindkey '^[[F' end-of-line
+bindkey '^[[4~' end-of-line
+bindkey '^[[8~' end-of-line
+bindkey '^[[OF' end-of-line
+
+#tmux
+bindkey '^[[1;5H' beginning-of-line
+bindkey '^[[1;5F' end-of-line
+
+# =============================
+
+#start starship
+eval "$(starship init zsh)"
+
+export LS_COLORS="\
+di=38;5;75:\
+ln=38;5;81:\
+ex=38;5;71:\
+fi=0:\
+pi=38;5;178:\
+so=38;5;170:\
+bd=38;5;110:\
+cd=38;5;110:\
+su=38;5;196:\
+sg=38;5;178:\
+tw=38;5;130:\
+ow=38;5;130"
+
+alias ls='ls --color=auto -p --group-directories-first'
+alias ll='ls -lh'
+
+
