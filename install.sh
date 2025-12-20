@@ -54,6 +54,13 @@ if [[ -f "$DOTFILES_DIR/gitconfig" ]]; then
   symlink "$DOTFILES_DIR/gitconfig" "$HOME/.gitconfig"
 fi
 
+# -------- vimrc --------
+if [[ -f "$DOTFILES_DIR/gitconfig" ]]; then
+  echo "▶ Installing vim config"
+  symlink "$DOTFILES_DIR/vimrc" "$HOME/.vimrc"
+fi
+
+
 # -------- platform hints --------
 echo
 echo "▶ Post-install notes:"

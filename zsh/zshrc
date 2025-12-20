@@ -1,9 +1,4 @@
 
-case "$(uname -s)" in
-  Darwin) source ".dotfiles/zsh/mac.zsh" ;;
-  Linux)  source ".dotfiles/zsh/linux.zsh" ;;
-esac
-
 # 初始化补全系统
 autoload -Uz compinit
 compinit
@@ -20,6 +15,10 @@ zle -N down-line-or-beginning-search
 bindkey '^[[A' up-line-or-beginning-search
 bindkey '^[[B' down-line-or-beginning-search
 
+case "$(uname -s)" in
+  Darwin) source ".dotfiles/zsh/mac.zsh" ;;
+  Linux)  source ".dotfiles/zsh/linux.zsh" ;;
+esac
 
 # ===== Home / End 键支持 =====
 
