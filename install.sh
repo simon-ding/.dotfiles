@@ -67,13 +67,14 @@ echo "▶ Post-install notes:"
 
 if [[ "$PLATFORM" == "mac" ]]; then
   echo "  - Recommended:"
-  echo "      brew install starship coreutils grep"
+  echo "      brew install starship coreutils grep zsh-autosuggestions zsh-syntax-highlighting"
   echo "      chsh -s /bin/zsh"
 fi
 
 if [[ "$PLATFORM" == "linux" ]]; then
   echo "  - Recommended:"
-  echo "      install zsh starship via package manager"
+  echo "      install zsh starship zsh-autosuggestions zsh-syntax-highlighting via package manager"
+  echo "      curl -sS https://starship.rs/install.sh | sh"
   echo "      chsh -s \$(which zsh)"
 fi
 
