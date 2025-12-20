@@ -16,8 +16,8 @@ bindkey '^[[A' up-line-or-beginning-search
 bindkey '^[[B' down-line-or-beginning-search
 
 case "$(uname -s)" in
-  Darwin) source ".dotfiles/zsh/mac.zsh" ;;
-  Linux)  source ".dotfiles/zsh/linux.zsh" ;;
+  Darwin) source "$HOME/.dotfiles/zsh/mac.zsh" ;;
+  Linux)  source "$HOME/.dotfiles/zsh/linux.zsh" ;;
 esac
 
 # ===== Home / End 键支持 =====
