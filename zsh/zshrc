@@ -25,10 +25,10 @@ zle -N down-line-or-beginning-search
 bindkey '^[[A' up-line-or-beginning-search
 bindkey '^[[B' down-line-or-beginning-search
 
-case "$(uname -s)" in
-  Darwin) source "$HOME/.dotfiles/zsh/mac.zsh" ;;
-  Linux)  source "$HOME/.dotfiles/zsh/linux.zsh" ;;
-esac
+# case "$(uname -s)" in
+#   Darwin) source "$HOME/.dotfiles/zsh/mac.zsh" ;;
+#   Linux)  source "$HOME/.dotfiles/zsh/linux.zsh" ;;
+# esac
 
 # ===== Home / End 键支持 =====
 
