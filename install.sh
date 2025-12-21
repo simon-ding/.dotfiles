@@ -41,10 +41,16 @@ echo "▶ Platform: $PLATFORM"
 
 # -------- shell --------
 echo "▶ Installing all configs"
+mkdir -p "$HOME/.config" 
 symlink "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
-mkdir -p "$HOME/.config" && symlink "$DOTFILES_DIR/starship.toml" "$HOME/.config/starship.toml"
 symlink "$DOTFILES_DIR/.gitconfig" "$HOME/.gitconfig"
 symlink "$DOTFILES_DIR/.vimrc" "$HOME/.vimrc"
+symlink "$DOTFILES_DIR/starship.toml" "$HOME/.config/starship.toml"
+
+# starship
+if ! command -v starship >/dev/null 2>&1; then
+  echo "install starship: https://starship.rs/guide/"
+fi
 
 
 # -------- platform hints --------
@@ -53,14 +59,13 @@ echo "▶ Post-install notes:"
 
 if [[ "$PLATFORM" == "mac" ]]; then
   echo "  - Recommended:"
-  echo "      brew install starship coreutils grep zsh-autosuggestions zsh-syntax-highlighting"
+  echo "      brew install coreutils grep zsh-autosuggestions zsh-syntax-highlighting"
   echo "      chsh -s /bin/zsh"
 fi
 
 if [[ "$PLATFORM" == "linux" ]]; then
   echo "  - Recommended:"
-  echo "      install zsh starship zsh-autosuggestions zsh-syntax-highlighting via package manager"
-  echo "      curl -sS https://starship.rs/install.sh | sh"
+  echo "      install zsh zsh-autosuggestions zsh-syntax-highlighting via package manager"
   echo "      chsh -s \$(which zsh)"
 fi
 
