@@ -44,6 +44,7 @@ Optional but recommended:
 
 - [`starship`](https://starship.rs/)
 - GNU coreutils (macOS only, via Homebrew)
+- zsh-autosuggestions & zsh-syntax-highlighting
 
 ---
 
@@ -52,5 +53,5 @@ Optional but recommended:
 Clone the repository:
 
 ```bash
-git clone https://github.com/<your-username>/dotfiles.git ~/.dotfiles
+git clone https://github.com/simon-ding/.dotfiles.git  ~/.dotfiles
 cd ~/.dotfiles
