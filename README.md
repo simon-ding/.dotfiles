@@ -28,7 +28,7 @@ This repository contains my shell and terminal configuration, designed with the 
 - Linux (Ubuntu / Debian / VPS)
 - Remote SSH environments
 
-> Tested primarily on macOS and Ubuntu.
+> Tested primarily on macOS and Debian.
 
 ---
 
