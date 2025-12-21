@@ -41,7 +41,7 @@ echo "▶ Platform: $PLATFORM"
 
 # -------- shell --------
 echo "▶ Installing zsh configs"
-symlink "$DOTFILES_DIR/zsh/zshrc" "$HOME/.zshrc"
+symlink "$DOTFILES_DIR/zshrc" "$HOME/.zshrc"
 
 # -------- starship --------
 echo "▶ Installing starship config"

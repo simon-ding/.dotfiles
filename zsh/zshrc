@@ -74,3 +74,29 @@ alias ll='ls -lh'
 
 
 
+case "$(uname -s)" in
+  Darwin) 
+    if [[ $- == *i* ]]; then
+      export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+      export PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH"
+    fi
+
+    # zsh-autosuggestions & zsh-syntax-highlighting
+    source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+    export PATH="/opt/homebrew/opt/node@20/bin:$PATH:$HOME/development/flutter/bin"
+    export LDFLAGS="-L/opt/homebrew/opt/node@20/lib"
+    export CPPFLAGS="-I/opt/homebrew/opt/node@20/include"
+    export PUB_HOSTED_URL="https://pub.flutter-io.cn"
+    export FLUTTER_STORAGE_BASE_URL="https://storage.flutter-io.cn"
+
+    export POLARIS_NO_AUTO_DOWNLOAD=true    
+    ;;
+  Linux)  
+    source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    ;;
+esac
+
+export PATH=$HOME/.gem/bin:$PATH:~/go/bin
