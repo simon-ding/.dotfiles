@@ -40,25 +40,11 @@ esac
 echo "▶ Platform: $PLATFORM"
 
 # -------- shell --------
-echo "▶ Installing zsh configs"
-symlink "$DOTFILES_DIR/zsh/zshrc" "$HOME/.zshrc"
-
-# -------- starship --------
-echo "▶ Installing starship config"
-mkdir -p "$HOME/.config"
-symlink "$DOTFILES_DIR/starship.toml" "$HOME/.config/starship.toml"
-
-# -------- git --------
-if [[ -f "$DOTFILES_DIR/gitconfig" ]]; then
-  echo "▶ Installing git config"
-  symlink "$DOTFILES_DIR/gitconfig" "$HOME/.gitconfig"
-fi
-
-# -------- vimrc --------
-if [[ -f "$DOTFILES_DIR/gitconfig" ]]; then
-  echo "▶ Installing vim config"
-  symlink "$DOTFILES_DIR/vimrc" "$HOME/.vimrc"
-fi
+echo "▶ Installing all configs"
+symlink "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
+mkdir -p "$HOME/.config" && symlink "$DOTFILES_DIR/starship.toml" "$HOME/.config/starship.toml"
+symlink "$DOTFILES_DIR/.gitconfig" "$HOME/.gitconfig"
+symlink "$DOTFILES_DIR/.vimrc" "$HOME/.vimrc"
 
 
 # -------- platform hints --------
