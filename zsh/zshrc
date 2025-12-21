@@ -60,4 +60,7 @@ ow=38;5;130"
 alias ls='ls --color=auto -p --group-directories-first'
 alias ll='ls -lh'
 
+[[ -f ~/.secrets/env ]] && source ~/.secrets/env
+
+
 
