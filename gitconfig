@@ -1,6 +1,6 @@
 [user]
 	name = Simon Ding
-	email = dingchuan91@gmail.com
+	email = 9017681+simon-ding@users.noreply.github.com
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
