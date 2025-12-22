@@ -72,7 +72,8 @@ alias ll='ls -lh'
 
 [[ -f ~/.secrets/env ]] && source ~/.secrets/env
 
-
+export PUB_HOSTED_URL="https://pub.flutter-io.cn"
+export FLUTTER_STORAGE_BASE_URL="https://storage.flutter-io.cn"
 
 case "$(uname -s)" in
   Darwin) 
@@ -88,8 +89,6 @@ case "$(uname -s)" in
     export PATH="/opt/homebrew/opt/node@20/bin:$PATH:$HOME/development/flutter/bin"
     export LDFLAGS="-L/opt/homebrew/opt/node@20/lib"
     export CPPFLAGS="-I/opt/homebrew/opt/node@20/include"
-    export PUB_HOSTED_URL="https://pub.flutter-io.cn"
-    export FLUTTER_STORAGE_BASE_URL="https://storage.flutter-io.cn"
 
     export POLARIS_NO_AUTO_DOWNLOAD=true    
     ;;
