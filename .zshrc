@@ -94,7 +94,7 @@ case "$(uname -s)" in
   Linux)  
     source /etc/os-release
     if [[ "$ID" == "bazzite" ]]; then
-      export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin/"
+      export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin/:$HOME/development/flutter/bin"
       source /home/linuxbrew/.linuxbrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
       source /home/linuxbrew/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     else
