@@ -50,9 +50,6 @@ bindkey '^[[1;5F' end-of-line
 
 # =============================
 
-#start starship
-eval "$(starship init zsh)"
-
 export LS_COLORS="\
 di=38;5;75:\
 ln=38;5;81:\
@@ -75,6 +72,8 @@ alias ll='ls -lh'
 export PUB_HOSTED_URL="https://pub.flutter-io.cn"
 export FLUTTER_STORAGE_BASE_URL="https://storage.flutter-io.cn"
 
+export PATH=$HOME/.gem/bin:$PATH:~/go/bin
+
 case "$(uname -s)" in
   Darwin) 
     if [[ $- == *i* ]]; then
@@ -93,9 +92,17 @@ case "$(uname -s)" in
     export POLARIS_NO_AUTO_DOWNLOAD=true    
     ;;
   Linux)  
-    source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    source /etc/os-release
+    if [[ "$ID" == "bazzite" ]]; then
+      export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin/"
+      source /home/linuxbrew/.linuxbrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+      source /home/linuxbrew/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    else
+      source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+      source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    fi
     ;;
 esac
 
-export PATH=$HOME/.gem/bin:$PATH:~/go/bin
+#start starship
+eval "$(starship init zsh)"
