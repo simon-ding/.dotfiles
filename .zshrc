@@ -67,6 +67,10 @@ ow=38;5;130"
 alias ls='ls --color=auto -p --group-directories-first'
 alias ll='ls -lh'
 
+if command -v vim >/dev/null 2>&1; then 
+  alias vi='vim'
+fi
+
 [[ -f ~/.secrets/env ]] && source ~/.secrets/env
 
 export PUB_HOSTED_URL="https://pub.flutter-io.cn"
