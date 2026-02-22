@@ -101,6 +101,9 @@ case "$(uname -s)" in
       export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin/:$HOME/development/flutter/bin"
       source /home/linuxbrew/.linuxbrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
       source /home/linuxbrew/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    elif [[ "$ID" == "arch" ]]; then
+      source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+      source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     else
       source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
       source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
