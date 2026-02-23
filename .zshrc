@@ -89,7 +89,7 @@ case "$(uname -s)" in
     source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
     source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-    export PATH="/opt/homebrew/opt/node@20/bin:$PATH:$HOME/development/flutter/bin"
+    export PATH="/opt/homebrew/opt/node@20/bin:$PATH:$HOME/development/flutter/bin:$HOME/Library/Python/3.9/bin"
     export LDFLAGS="-L/opt/homebrew/opt/node@20/lib"
     export CPPFLAGS="-I/opt/homebrew/opt/node@20/include"
 
