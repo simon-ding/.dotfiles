@@ -25,9 +25,10 @@ success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set
 error_symbol = "[➜](red)"
 
 [hostname]
-format='[$hostname]($style):'
+format='[$ssh_symbol$hostname]($style):'
+ssh_symbol ="🌐"
 [username]
-format='[$user]($style)@'
+format='[$user]($style)'
 
 [container]
 format = "[$symbol $name]($style) "
