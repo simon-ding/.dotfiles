@@ -3,6 +3,7 @@ add_newline = false
 format = """
 $username\
 $hostname\
+$container\
 $directory\
 $git_branch\
 $git_status\
@@ -27,3 +28,8 @@ error_symbol = "[➜](red)"
 format='[$hostname]($style):'
 [username]
 format='[$user]($style)@'
+
+[container]
+format = "[$symbol $name]($style) "
+symbol = "🐳"
+style = "bold blue"
