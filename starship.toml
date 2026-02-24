@@ -5,6 +5,7 @@ $username\
 $hostname\
 $container\
 $directory\
+$python\
 $git_branch\
 $git_status\
 $character
