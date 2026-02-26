@@ -78,8 +78,11 @@ export FLUTTER_STORAGE_BASE_URL="https://storage.flutter-io.cn"
 
 export PATH=$HOME/.gem/bin:$PATH:~/go/bin
 
-case "$(uname -s)" in
-  Darwin) 
+is_distrobox() {
+    [ -f "/.distroboxenv" ] || [ -n "$DISTROBOX_ENTER_PATH" ]
+}
+
+function macos_envs {
     if [[ $- == *i* ]]; then
       export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
       export PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH"
@@ -94,24 +97,41 @@ case "$(uname -s)" in
     export CPPFLAGS="-I/opt/homebrew/opt/node@20/include"
 
     export POLARIS_NO_AUTO_DOWNLOAD=true    
-    ;;
-  Linux)  
+}
+
+
+function linux_envs {
+    alias devbox="distrobox enter dev"
+
+    export PATH="$PATH:$HOME/development/flutter/bin"
+    export PATH="$PATH:/usr/local/go/bin"
+    
+
     source /etc/os-release
     if [[ "$ID" == "bazzite" ]]; then
-      export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin/:$HOME/development/flutter/bin"
+      export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin/"
       source /home/linuxbrew/.linuxbrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
       source /home/linuxbrew/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     elif [[ "$ID" == "arch" ]]; then
-      export PATH="$PATH:$HOME/development/flutter/bin"
-      export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
       source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
       source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     else
       source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
       source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     fi
+}
+
+case "$(uname -s)" in
+  Darwin) 
+    macos_envs    
+    ;;
+  Linux) 
+    linux_envs
     ;;
 esac
+
+# 加载机器特定配置
+[[ -f ~/.zshrc_local ]] && source ~/.zshrc_local
 
 #start starship
 eval "$(starship init zsh)"
