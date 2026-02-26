@@ -82,6 +82,19 @@ is_distrobox() {
     [ -f "/.distroboxenv" ] || [ -n "$DISTROBOX_ENTER_PATH" ]
 }
 
+devbox() {
+  if command -v distrobox >/dev/null 2>&1; then 
+    distrobox enter dev
+  else
+    if is_distrobox; then 
+      return 0
+    fi
+    echo "no distrobox, ignored"
+    return 1
+  fi
+}
+
+
 function macos_envs {
     if [[ $- == *i* ]]; then
       export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
@@ -101,8 +114,6 @@ function macos_envs {
 
 
 function linux_envs {
-    alias devbox="distrobox enter dev"
-
     export PATH="$PATH:$HOME/development/flutter/bin"
     export PATH="$PATH:/usr/local/go/bin"
     
