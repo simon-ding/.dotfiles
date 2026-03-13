@@ -111,12 +111,6 @@ function macos_envs {
 
     export POLARIS_NO_AUTO_DOWNLOAD=true  
 
-    # homebrew 镜像  
-    export HOMEBREW_NO_AUTO_UPDATE=1
-    export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.ustc.edu.cn/brew.git"
-    export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.ustc.edu.cn/homebrew-core.git"
-    export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"
-    export HOMEBREW_API_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles/api"
 }
 
 
@@ -147,6 +141,14 @@ case "$(uname -s)" in
     linux_envs
     ;;
 esac
+
+# homebrew ustc mirror
+export HOMEBREW_NO_AUTO_UPDATE=1
+export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.ustc.edu.cn/brew.git"
+export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.ustc.edu.cn/homebrew-core.git"
+export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"
+export HOMEBREW_API_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles/api"
+
 
 # 加载机器特定配置
 [[ -f ~/.zshrc_local ]] && source ~/.zshrc_local
