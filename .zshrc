@@ -109,7 +109,14 @@ function macos_envs {
     export LDFLAGS="-L/opt/homebrew/opt/node@20/lib"
     export CPPFLAGS="-I/opt/homebrew/opt/node@20/include"
 
-    export POLARIS_NO_AUTO_DOWNLOAD=true    
+    export POLARIS_NO_AUTO_DOWNLOAD=true  
+
+    # homebrew 镜像  
+    export HOMEBREW_NO_AUTO_UPDATE=1
+    export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.ustc.edu.cn/brew.git"
+    export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.ustc.edu.cn/homebrew-core.git"
+    export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"
+    export HOMEBREW_API_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles/api"
 }
 
 
