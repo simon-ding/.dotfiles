@@ -116,9 +116,44 @@ fi
 
 export PATH=$HOME/.gem/bin:$PATH:~/go/bin
 
+# --- Custom Functions ---
+extract() { # 解压函数，支持多种格式
+    if [ -f $1 ]; then
+        case $1 in
+            *.tar.bz2)   tar xjf $1     ;;
+            *.tar.gz)    tar xzf $1     ;;
+            *.bz2)       bunzip2 $1     ;;
+            *.rar)       unrar x $1     ;;
+            *.gz)        gunzip $1      ;;
+            *.tar)       tar xf $1      ;;
+            *.tbz2)      tar xjf $1     ;;
+            *.tgz)       tar xzf $1     ;;
+            *.zip)       unzip $1       ;;
+            *.7z)        7z x $1        ;;
+            *)           echo "'$1' cannot be extracted via extract()" ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+
+serve() {
+    local port="${1:-8080}"
+    echo "🚀 Serving current directory at http://localhost:$port"
+    # 优先使用 Go 写的静态服务工具，没有则用 Python
+    if command -v go-serve &>/dev/null; then
+        go-serve -port "$port"
+    else
+        python3 -m http.server "$port"
+    fi
+}
+
+# --- End Custom Functions ---
+
 is_distrobox() {
     [ -f "/.distroboxenv" ] || [ -n "$DISTROBOX_ENTER_PATH" ]
 }
+
 
 devbox() {
   if command -v distrobox >/dev/null 2>&1; then 
