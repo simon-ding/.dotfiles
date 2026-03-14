@@ -106,9 +106,6 @@ if command -v vim >/dev/null 2>&1; then
   alias vi='vim'
 fi
 
-
-[[ -f ~/.secrets/env ]] && source ~/.secrets/env
-
 export PUB_HOSTED_URL="https://pub.flutter-io.cn"
 export FLUTTER_STORAGE_BASE_URL="https://storage.flutter-io.cn"
 
@@ -160,14 +157,11 @@ function linux_envs {
     fi
 }
 
-case "$(uname -s)" in
-  Darwin) 
-    macos_envs    
-    ;;
-  Linux) 
-    linux_envs
-    ;;
-esac
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  macos_envs
+else
+  linux_envs
+fi
 
 # homebrew ustc mirror
 export HOMEBREW_NO_AUTO_UPDATE=1
