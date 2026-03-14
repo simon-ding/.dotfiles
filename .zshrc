@@ -1,5 +1,8 @@
 #!/usr/bin/env zsh
 
+typeset -U path fpath  # 路径去重
+
+
 # homebrew general
 # --- 1. Homebrew 路径自动探测 ---
 if [[ -d "/opt/homebrew" ]]; then
@@ -34,8 +37,6 @@ setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
-
-typeset -U fpath # fpath 去重
 
 # --- 4. 启动补全系统 ---
 autoload -Uz compinit
