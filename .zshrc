@@ -118,24 +118,31 @@ export PATH=$HOME/.gem/bin:$PATH:~/go/bin
 
 # --- Custom Functions ---
 extract() { # 解压函数，支持多种格式
-    if [ -f $1 ]; then
-        case $1 in
-            *.tar.bz2)   tar xjf $1     ;;
-            *.tar.gz)    tar xzf $1     ;;
-            *.bz2)       bunzip2 $1     ;;
-            *.rar)       unrar x $1     ;;
-            *.gz)        gunzip $1      ;;
-            *.tar)       tar xf $1      ;;
-            *.tbz2)      tar xjf $1     ;;
-            *.tgz)       tar xzf $1     ;;
-            *.zip)       unzip $1       ;;
-            *.7z)        7z x $1        ;;
-            *)           echo "'$1' cannot be extracted via extract()" ;;
+    # 1. 检查参数个数是否为 0
+    if (( $# == 0 )); then
+        echo "❌ Usage: extract <file_name>"
+        return 1
+    fi
+
+    # 2. 使用双引号包裹变量，防止空值或带空格的文件名报错
+    if [ -f "$1" ]; then
+        case "$1" in
+            *.tar.bz2)   tar xjf "$1"     ;;
+            *.tar.gz)    tar xzf "$1"     ;;
+            *.bz2)       bunzip2 "$1"     ;;
+            *.rar)       unrar x "$1"     ;;
+            *.gz)        gunzip "$1"      ;;
+            *.tar)       tar xf "$1"      ;;
+            *.tbz2)      tar xjf "$1"     ;;
+            *.tgz)       tar xzf "$1"     ;;
+            *.zip)       unzip "$1"       ;;
+            *.7z)        7z x "$1"        ;;
+            *)           echo "❓ '$1' cannot be extracted via extract()" ;;
         esac
     else
-        echo "'$1' is not a valid file"
-    fi
-}
+        echo "❌ '$1' is not a valid file"
+        return 1
+    fi}
 
 serve() {
     local port="${1:-8080}"
