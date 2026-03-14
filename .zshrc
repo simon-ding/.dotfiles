@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 # homebrew general
 # --- 1. Homebrew 路径自动探测 ---
