@@ -47,6 +47,10 @@ symlink "$DOTFILES_DIR/.gitconfig" "$HOME/.gitconfig"
 symlink "$DOTFILES_DIR/.vimrc" "$HOME/.vimrc"
 symlink "$DOTFILES_DIR/starship.toml" "$HOME/.config/starship.toml"
 
+if [[ "$PLATFORM" == "mac" ]]; then
+  symlink "$DOTFILES_DIR/hammerspoon" "$HOME/.hammerspoon"
+fi
+
 # starship
 if ! command -v starship >/dev/null 2>&1; then
 	echo "install starship: https://starship.rs/guide/"
