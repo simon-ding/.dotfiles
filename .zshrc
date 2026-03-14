@@ -195,7 +195,9 @@ function linux_envs {
   export PATH="$PATH:/usr/local/go/bin"
 
   source /etc/os-release
-  if [[ "$ID" == "arch" ]]; then
+  if [[ "$ID" == "bazzite" ]]; then
+    #pass, already sourced
+  elif [[ "$ID" == "arch" ]]; then
     source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
     source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
   else
