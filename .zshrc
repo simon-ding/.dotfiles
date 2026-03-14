@@ -106,9 +106,6 @@ if command -v vim >/dev/null 2>&1; then
   alias vi='vim'
 fi
 
-export PUB_HOSTED_URL="https://pub.flutter-io.cn"
-export FLUTTER_STORAGE_BASE_URL="https://storage.flutter-io.cn"
-
 export PATH=$HOME/.gem/bin:$PATH:~/go/bin
 
 is_distrobox() {
@@ -129,7 +126,7 @@ devbox() {
 
 
 function macos_envs {
-    if [[ $- == *i* ]]; then
+    if [[ $- == *i* ]]; then #只在交互式模式使用gnu命令，避免破坏系统脚本
       export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
       export PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH"
     fi
@@ -170,6 +167,10 @@ export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.ustc.edu.cn/brew.git"
 export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.ustc.edu.cn/homebrew-core.git"
 export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"
 export HOMEBREW_API_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles/api"
+
+# flutter china mirror
+export PUB_HOSTED_URL="https://pub.flutter-io.cn"
+export FLUTTER_STORAGE_BASE_URL="https://storage.flutter-io.cn"
 
 
 # fzf, bat, fd 配置
