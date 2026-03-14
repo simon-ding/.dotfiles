@@ -1,3 +1,29 @@
+# homebrew general
+# --- 1. Homebrew 路径自动探测 ---
+if [[ -d "/opt/homebrew" ]]; then
+    # macOS ARM 路径
+    export HOMEBREW_PREFIX="/opt/homebrew"
+elif [[ -d "/home/linuxbrew/.linuxbrew" ]]; then
+    # Bazzite / Linux 标准路径
+    export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
+fi
+
+# 如果找到了 Homebrew，则初始化环境变量 (PATH, MANPATH 等)
+if [[ -n "$HOMEBREW_PREFIX" ]]; then
+    eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
+
+  export PATH="$HOMEBREW_PREFIX/bin:$PATH"
+
+  if [[ -d "$HOMEBREW_PREFIX/share/zsh/site-functions" ]]; then
+    fpath=($HOMEBREW_PREFIX/share/zsh/site-functions $fpath)
+  fi
+
+  # zsh-autosuggestions & zsh-syntax-highlighting
+  source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+fi
+
 
 HISTFILE=~/.zsh_history
 HISTSIZE=50000
@@ -8,10 +34,19 @@ setopt SHARE_HISTORY
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
 
+typeset -U fpath # fpath 去重
 
-# 初始化补全系统
+# --- 4. 启动补全系统 ---
 autoload -Uz compinit
-compinit
+if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.m1) ]]; then
+    compinit -C
+else
+    compinit
+fi
+
+# 强化补全风格 (美化 Tab 选单)
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # 忽略大小写补全
 
 # 加载历史前缀搜索 widget
 autoload -Uz up-line-or-beginning-search
@@ -71,11 +106,6 @@ if command -v vim >/dev/null 2>&1; then
   alias vi='vim'
 fi
 
-# fzf
-if command -v fzf >/dev/null 2>&1; then 
-  source <(fzf --zsh)
-fi
-
 
 [[ -f ~/.secrets/env ]] && source ~/.secrets/env
 
@@ -107,10 +137,6 @@ function macos_envs {
       export PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH"
     fi
 
-    # zsh-autosuggestions & zsh-syntax-highlighting
-    source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-    source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
     export PATH="/opt/homebrew/opt/node@20/bin:$PATH:$HOME/development/flutter/bin:$HOME/Library/Python/3.9/bin"
     export LDFLAGS="-L/opt/homebrew/opt/node@20/lib"
     export CPPFLAGS="-I/opt/homebrew/opt/node@20/include"
@@ -124,13 +150,8 @@ function linux_envs {
     export PATH="$PATH:$HOME/development/flutter/bin"
     export PATH="$PATH:/usr/local/go/bin"
     
-
     source /etc/os-release
-    if [[ "$ID" == "bazzite" ]]; then
-      export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin/"
-      source /home/linuxbrew/.linuxbrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-      source /home/linuxbrew/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    elif [[ "$ID" == "arch" ]]; then
+    if [[ "$ID" == "arch" ]]; then
       source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
       source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     else
@@ -155,6 +176,22 @@ export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.ustc.edu.cn/brew.git"
 export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.ustc.edu.cn/homebrew-core.git"
 export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"
 export HOMEBREW_API_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles/api"
+
+
+# fzf, bat, fd 配置
+if command -v fzf >/dev/null 2>&1; then 
+  source <(fzf --zsh)
+  if command -v bat >/dev/null 2>&1; then 
+    # 设置 FZF 的默认预览行为
+    export FZF_DEFAULT_OPTS="--height 60% --layout=reverse --border --preview 'bat --color=always --style=numbers --line-range :500 {}'"
+    # 设置预览窗口的布局（比如：右侧占 60%，允许换行）
+    export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --preview-window=right:60%:wrap"
+  fi
+  if command -v fd >/dev/null 2>&1; then 
+    export FZF_DEFAULT_COMMAND='fd --type f --hidden --strip-cwd-prefix --exclude .git --exclude .DS_Store'
+  fi
+fi
+
 
 # 加载机器特定配置
 [[ -f ~/.zshrc_local ]] && source ~/.zshrc_local
