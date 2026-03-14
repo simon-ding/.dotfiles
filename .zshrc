@@ -196,7 +196,7 @@ function linux_envs {
 
   source /etc/os-release
   if [[ "$ID" == "bazzite" ]]; then
-    #pass, already sourced
+    #pass, already sourced in homebrew section
   elif [[ "$ID" == "arch" ]]; then
     source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
     source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
