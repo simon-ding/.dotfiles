@@ -150,6 +150,10 @@ export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.ustc.edu.cn/homebrew-core.git"
 export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"
 export HOMEBREW_API_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles/api"
 
+# fzf
+if command -v fzf >/dev/null 2>&1; then 
+  source <(fzf --zsh)
+fi
 
 # 加载机器特定配置
 [[ -f ~/.zshrc_local ]] && source ~/.zshrc_local
