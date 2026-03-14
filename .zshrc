@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 # homebrew general
 # --- 1. Homebrew 路径自动探测 ---
 if [[ -d "/opt/homebrew" ]]; then
