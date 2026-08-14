@@ -188,6 +188,8 @@ function macos_envs {
 
   export POLARIS_NO_AUTO_DOWNLOAD=true
 
+  #bitwarden ssh agent
+  export SSH_AUTH_SOCK="$HOME/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock"
 }
 
 function linux_envs {

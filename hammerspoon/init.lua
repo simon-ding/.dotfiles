@@ -107,3 +107,55 @@ wf:subscribe(hs.window.filter.windowFocused, function(window)
         end
     end
 end)
+
+
+-- 接通电源恢复亮度
+-- 1. 将状态存入全局表，确保生命周期安全
+hs.lastPowerStatus = hs.battery.powerSource()
+
+-- 2. 封装一个设置函数，方便初始化和回调共用
+local function updateBrightness()
+    local currentStatus = hs.battery.powerSource()
+    local isAC = (currentStatus == "AC Power")
+    
+    if isAC then
+        hs.brightness.set(90)
+        -- hs.alert.show("🔌 已接通电源")
+    else
+        hs.brightness.set(60)
+        -- hs.alert.show("🔋 电池供电")
+    end
+    
+    -- 更新全局状态记录
+    hs.lastPowerStatus = currentStatus
+end
+
+-- 3. 创建监听器
+hs.powerWatcher = hs.battery.watcher.new(function()
+    local currentStatus = hs.battery.powerSource()
+    
+    -- 只有当状态真正改变时才执行，防止系统重复触发同一状态的回调
+    if currentStatus ~= hs.lastPowerStatus then
+        updateBrightness()
+    end
+end)
+
+-- 4. 启动监听
+hs.powerWatcher:start()
+
+-- 5. 【关键】启动时立即执行一次，确保当前状态即刻生效
+updateBrightness()
+
+-- 定义切换桌面的函数
+local function gotoSpace(num)
+    -- 注意：这里模拟的是 macOS 默认的 Control + 数字键
+    -- 如果你在系统设置中修改过切换桌面的快捷键，请相应修改此处的修饰键
+    hs.eventtap.keyStroke({"ctrl"}, tostring(num))
+    --hs.alert.show("🚀 桌面 " .. num, 0.5)
+end
+
+for i = 1, 9 do
+    hs.hotkey.bind(hyper, tostring(i), function()
+        gotoSpace(i)
+    end)
+end
