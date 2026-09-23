@@ -206,6 +206,10 @@ function linux_envs {
     source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
     source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
   fi
+
+  # bitwarden ssh agent socket
+  export SSH_AUTH_SOCK="$HOME/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock"
+
 }
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
